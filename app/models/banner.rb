@@ -1,17 +1,5 @@
-class Banner
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
+class Banner < ActiveRecord::Base
+  has_and_belongs_to_many :categories
 
-  attr_accessor :url, :categories
-
-  def initialize(**attributes)
-    attributes.each do |name, value|
-      send "#{name}=", value
-    end
-  end
-
-  def persisted?
-    false
-  end
+  validates :url, presence: true
 end

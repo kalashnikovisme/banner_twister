@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root to: 'banners#show'
+  root to: 'web/banners#show'
 end
