@@ -1,7 +1,7 @@
 class Web::BannersController < ApplicationController
   def show
     session[:last_banner_ids] ||= []
-    categories = Category.where name: params[:category]
+    categories = params[:category].present? ? Category.where(name: params[:category]) : Category.all
     banners = Banner.where.not(count: 0).where(id: categories.map(&:banners).flatten.map(&:id)).sort { |a, b| b <=> a }
     if banners.map(&:id) - session[:last_banner_ids] == []
       session[:last_banner_ids] = []
